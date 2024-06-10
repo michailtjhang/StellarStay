@@ -118,7 +118,6 @@ $firstDayOfMonth = date("Y-m-01", strtotime($currMonth));
 
 
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-<link rel="stylesheet" href="../assets/calender/css/demo.css" />
 <link rel="stylesheet" href="../assets/calender/css/theme1.css" />
-<script type="text/javascript" src="../assets/calender/js/caleandar.js"></script>
+<script type="text/javascript" src="../assets/calender/js/caleandar.min.js"></script>
 <script type="text/javascript" src="../assets/calender/js/demo.js"></script>

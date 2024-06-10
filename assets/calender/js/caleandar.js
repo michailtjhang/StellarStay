@@ -3,297 +3,404 @@
   Version: 0.1.0;
   (◠‿◠✿)
 */
-var Calendar = function(model, options, date){
-  // Default Values
+var Kalender = function (model, options, date) {
+  // Nilai Default
   this.Options = {
-    Color: '',
-    LinkColor: '',
-    NavShow: true,
-    NavVertical: false,
-    NavLocation: '',
-    DateTimeShow: true,
-    DateTimeFormat: 'mmm, yyyy',
-    DatetimeLocation: '',
-    EventClick: '',
-    EventTargetWholeDay: false,
-    DisabledDays: [],
-    ModelChange: model
+    Warna: "",
+    WarnaLink: "",
+    NavTampil: true,
+    NavVertikal: false,
+    LokasiNav: "",
+    TanggalWaktuTampil: true,
+    FormatTanggalWaktu: "mmm, yyyy",
+    LokasiTanggalWaktu: "",
+    KlikEvent: "",
+    TargetEventSehariPenuh: false,
+    HariTidakAktif: [],
+    UbahModel: model,
   };
-  // Overwriting default values
-  for(var key in options){
-    this.Options[key] = typeof options[key]=='string'?options[key].toLowerCase():options[key];
+  // Menimpa nilai default
+  for (var key in options) {
+    this.Options[key] =
+      typeof options[key] == "string"
+        ? options[key].toLowerCase()
+        : options[key];
   }
 
-  model?this.Model=model:this.Model={};
-  this.Today = new Date();
+  model ? (this.Model = model) : (this.Model = {});
+  this.HariIni = new Date();
 
-  this.Selected = this.Today
-  this.Today.Month = this.Today.getMonth();
-  this.Today.Year = this.Today.getFullYear();
-  if(date){this.Selected = date}
-  this.Selected.Month = this.Selected.getMonth();
-  this.Selected.Year = this.Selected.getFullYear();
+  this.Terpilih = this.HariIni;
+  this.HariIni.Bulan = this.HariIni.getMonth();
+  this.HariIni.Tahun = this.HariIni.getFullYear();
+  if (date) {
+    this.Terpilih = date;
+  }
+  this.Terpilih.Bulan = this.Terpilih.getMonth();
+  this.Terpilih.Tahun = this.Terpilih.getFullYear();
 
-  this.Selected.Days = new Date(this.Selected.Year, (this.Selected.Month + 1), 0).getDate();
-  this.Selected.FirstDay = new Date(this.Selected.Year, (this.Selected.Month), 1).getDay();
-  this.Selected.LastDay = new Date(this.Selected.Year, (this.Selected.Month + 1), 0).getDay();
+  this.Terpilih.Hari = new Date(
+    this.Terpilih.Tahun,
+    this.Terpilih.Bulan + 1,
+    0
+  ).getDate();
+  this.Terpilih.HariPertama = new Date(
+    this.Terpilih.Tahun,
+    this.Terpilih.Bulan,
+    1
+  ).getDay();
+  this.Terpilih.HariTerakhir = new Date(
+    this.Terpilih.Tahun,
+    this.Terpilih.Bulan + 1,
+    0
+  ).getDay();
 
-  this.Prev = new Date(this.Selected.Year, (this.Selected.Month - 1), 1);
-  if(this.Selected.Month==0){this.Prev = new Date(this.Selected.Year-1, 11, 1);}
-  this.Prev.Days = new Date(this.Prev.getFullYear(), (this.Prev.getMonth() + 1), 0).getDate();
+  this.Sebelum = new Date(this.Terpilih.Tahun, this.Terpilih.Bulan - 1, 1);
+  if (this.Terpilih.Bulan == 0) {
+    this.Sebelum = new Date(this.Terpilih.Tahun - 1, 11, 1);
+  }
+  this.Sebelum.Hari = new Date(
+    this.Sebelum.getFullYear(),
+    this.Sebelum.getMonth() + 1,
+    0
+  ).getDate();
 };
 
-function createCalendar(calendar, element, adjuster){
-  if(typeof adjuster !== 'undefined'){
-    var newDate = new Date(calendar.Selected.Year, calendar.Selected.Month + adjuster, 1);
-    calendar = new Calendar(calendar.Model, calendar.Options, newDate);
-    element.innerHTML = '';
-  }else{
-    for(var key in calendar.Options){
-      typeof calendar.Options[key] != 'function' && typeof calendar.Options[key] != 'object' && calendar.Options[key]?element.className += " " + key + "-" + calendar.Options[key]:0;
+function buatKalender(kalender, elemen, penyesuaian) {
+  if (typeof penyesuaian !== "undefined") {
+    var tanggalBaru = new Date(
+      kalender.Terpilih.Tahun,
+      kalender.Terpilih.Bulan + penyesuaian,
+      1
+    );
+    kalender = new Kalender(kalender.Model, kalender.Options, tanggalBaru);
+    elemen.innerHTML = "";
+  } else {
+    for (var key in kalender.Options) {
+      typeof kalender.Options[key] != "function" &&
+      typeof kalender.Options[key] != "object" &&
+      kalender.Options[key]
+        ? (elemen.className += " " + key + "-" + kalender.Options[key])
+        : 0;
     }
   }
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var bulan = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
 
-  function AddSidebar(){
-    var sidebar = document.createElement('div');
-    sidebar.className += 'cld-sidebar';
+  function TambahSidebar() {
+    var sidebar = document.createElement("div");
+    sidebar.className += "cld-sidebar";
 
-    var monthList = document.createElement('ul');
-    monthList.className += 'cld-monthList';
+    var daftarBulan = document.createElement("ul");
+    daftarBulan.className += "cld-monthList";
 
-    for(var i = 0; i < months.length - 3; i++){
-      var x = document.createElement('li');
-      x.className += 'cld-month';
-      var n = i - (4 - calendar.Selected.Month);
-      // Account for overflowing month values
-      if(n<0){n+=12;}
-      else if(n>11){n-=12;}
-      // Add Appropriate Class
-      if(i==0){
-        x.className += ' cld-rwd cld-nav';
-        x.addEventListener('click', function(){
-          typeof calendar.Options.ModelChange == 'function'?calendar.Model = calendar.Options.ModelChange():calendar.Model = calendar.Options.ModelChange;
-          createCalendar(calendar, element, -1);});
-        x.innerHTML += '<svg height="15" width="15" viewBox="0 0 100 75" fill="rgba(255,255,255,0.5)"><polyline points="0,75 100,75 50,0"></polyline></svg>';
+    for (var i = 0; i < bulan.length - 3; i++) {
+      var x = document.createElement("li");
+      x.className += "cld-month";
+      var n = i - (4 - kalender.Terpilih.Bulan);
+      // Menyesuaikan nilai bulan yang melimpah
+      if (n < 0) {
+        n += 12;
+      } else if (n > 11) {
+        n -= 12;
       }
-      else if(i==months.length - 4){
-        x.className += ' cld-fwd cld-nav';
-        x.addEventListener('click', function(){
-          typeof calendar.Options.ModelChange == 'function'?calendar.Model = calendar.Options.ModelChange():calendar.Model = calendar.Options.ModelChange;
-          createCalendar(calendar, element, 1);} );
-        x.innerHTML += '<svg height="15" width="15" viewBox="0 0 100 75" fill="rgba(255,255,255,0.5)"><polyline points="0,0 100,0 50,75"></polyline></svg>';
-      }
-      else{
-        if(i < 4){x.className += ' cld-pre';}
-        else if(i > 4){x.className += ' cld-post';}
-        else{x.className += ' cld-curr';}
+      // Menambahkan Kelas yang Tepat
+      if (i == 0) {
+        x.className += " cld-rwd cld-nav";
+        x.addEventListener("click", function () {
+          typeof kalender.Options.UbahModel == "function"
+            ? (kalender.Model = kalender.Options.UbahModel())
+            : (kalender.Model = kalender.Options.UbahModel);
+          buatKalender(kalender, elemen, -1);
+        });
+        x.innerHTML +=
+          '<svg height="15" width="15" viewBox="0 0 100 75" fill="rgba(255,255,255,0.5)"><polyline points="0,75 100,75 50,0"></polyline></svg>';
+      } else if (i == bulan.length - 4) {
+        x.className += " cld-fwd cld-nav";
+        x.addEventListener("click", function () {
+          typeof kalender.Options.UbahModel == "function"
+            ? (kalender.Model = kalender.Options.UbahModel())
+            : (kalender.Model = kalender.Options.UbahModel);
+          buatKalender(kalender, elemen, 1);
+        });
+        x.innerHTML +=
+          '<svg height="15" width="15" viewBox="0 0 100 75" fill="rgba(255,255,255,0.5)"><polyline points="0,0 100,0 50,75"></polyline></svg>';
+      } else {
+        if (i < 4) {
+          x.className += " cld-pre";
+        } else if (i > 4) {
+          x.className += " cld-post";
+        } else {
+          x.className += " cld-curr";
+        }
 
-        //prevent losing var adj value (for whatever reason that is happening)
         (function () {
-          var adj = (i-4);
-          //x.addEventListener('click', function(){createCalendar(calendar, element, adj);console.log('kk', adj);} );
-          x.addEventListener('click', function(){
-            typeof calendar.Options.ModelChange == 'function'?calendar.Model = calendar.Options.ModelChange():calendar.Model = calendar.Options.ModelChange;
-            createCalendar(calendar, element, adj);} );
-          x.setAttribute('style', 'opacity:' + (1 - Math.abs(adj)/4));
-          x.innerHTML += months[n].substr(0,3);
-        }()); // immediate invocation
+          var adj = i - 4;
+          x.addEventListener("click", function () {
+            typeof kalender.Options.UbahModel == "function"
+              ? (kalender.Model = kalender.Options.UbahModel())
+              : (kalender.Model = kalender.Options.UbahModel);
+            buatKalender(kalender, elemen, adj);
+          });
+          x.setAttribute("style", "opacity:" + (1 - Math.abs(adj) / 4));
+          x.innerHTML += bulan[n].substr(0, 3);
+        })();
 
-        if(n==0){
-          var y = document.createElement('li');
-          y.className += 'cld-year';
-          if(i<5){
-            y.innerHTML += calendar.Selected.Year;
-          }else{
-            y.innerHTML += calendar.Selected.Year + 1;
+        if (n == 0) {
+          var y = document.createElement("li");
+          y.className += "cld-year";
+          if (i < 5) {
+            y.innerHTML += kalender.Terpilih.Tahun;
+          } else {
+            y.innerHTML += kalender.Terpilih.Tahun + 1;
           }
-          monthList.appendChild(y);
+          daftarBulan.appendChild(y);
         }
       }
-      monthList.appendChild(x);
+      daftarBulan.appendChild(x);
     }
-    sidebar.appendChild(monthList);
-    if(calendar.Options.NavLocation){
-      document.getElementById(calendar.Options.NavLocation).innerHTML = "";
-      document.getElementById(calendar.Options.NavLocation).appendChild(sidebar);
+    sidebar.appendChild(daftarBulan);
+    if (kalender.Options.LokasiNav) {
+      document.getElementById(kalender.Options.LokasiNav).innerHTML = "";
+      document
+        .getElementById(kalender.Options.LokasiNav)
+        .appendChild(sidebar);
+    } else {
+      elemen.appendChild(sidebar);
     }
-    else{element.appendChild(sidebar);}
   }
 
-  var mainSection = document.createElement('div');
-  mainSection.className += "cld-main";
+  var bagianUtama = document.createElement("div");
+  bagianUtama.className += "cld-main";
 
-  function AddDateTime(){
-      var datetime = document.createElement('div');
-      datetime.className += "cld-datetime";
-      if(calendar.Options.NavShow && !calendar.Options.NavVertical){
-        var rwd = document.createElement('div');
-        rwd.className += " cld-rwd cld-nav";
-        rwd.addEventListener('click', function(){createCalendar(calendar, element, -1);} );
-        rwd.innerHTML = '<svg height="15" width="15" viewBox="0 0 75 100" fill="rgba(0,0,0,0.5)"><polyline points="0,50 75,0 75,100"></polyline></svg>';
-        datetime.appendChild(rwd);
-      }
-      var today = document.createElement('div');
-      today.className += ' today';
-      today.innerHTML = months[calendar.Selected.Month] + ", " + calendar.Selected.Year;
-      datetime.appendChild(today);
-      if(calendar.Options.NavShow && !calendar.Options.NavVertical){
-        var fwd = document.createElement('div');
-        fwd.className += " cld-fwd cld-nav";
-        fwd.addEventListener('click', function(){createCalendar(calendar, element, 1);} );
-        fwd.innerHTML = '<svg height="15" width="15" viewBox="0 0 75 100" fill="rgba(0,0,0,0.5)"><polyline points="0,0 75,50 0,100"></polyline></svg>';
-        datetime.appendChild(fwd);
-      }
-      if(calendar.Options.DatetimeLocation){
-        document.getElementById(calendar.Options.DatetimeLocation).innerHTML = "";
-        document.getElementById(calendar.Options.DatetimeLocation).appendChild(datetime);
-      }
-      else{mainSection.appendChild(datetime);}
+  function TambahTanggalWaktu() {
+    var tanggalWaktu = document.createElement("div");
+    tanggalWaktu.className += "cld-datetime";
+    if (kalender.Options.NavTampil && !kalender.Options.NavVertikal) {
+      var rwd = document.createElement("div");
+      rwd.className += " cld-rwd cld-nav";
+      rwd.addEventListener("click", function () {
+        buatKalender(kalender, elemen, -1);
+      });
+      rwd.innerHTML =
+        '<svg height="15" width="15" viewBox="0 0 75 100" fill="rgba(0,0,0,0.5)"><polyline points="0,50 75,0 75,100"></polyline></svg>';
+      tanggalWaktu.appendChild(rwd);
+    }
+    var hariIni = document.createElement("div");
+    hariIni.className += " today";
+    hariIni.innerHTML =
+      bulan[kalender.Terpilih.Bulan] + ", " + kalender.Terpilih.Tahun;
+    tanggalWaktu.appendChild(hariIni);
+    if (kalender.Options.NavTampil && !kalender.Options.NavVertikal) {
+      var fwd = document.createElement("div");
+      fwd.className += " cld-fwd cld-nav";
+      fwd.addEventListener("click", function () {
+        buatKalender(kalender, elemen, 1);
+      });
+      fwd.innerHTML =
+        '<svg height="15" width="15" viewBox="0 0 75 100" fill="rgba(0,0,0,0.5)"><polyline points="0,0 75,50 0,100"></polyline></svg>';
+      tanggalWaktu.appendChild(fwd);
+    }
+    if (kalender.Options.LokasiTanggalWaktu) {
+      document.getElementById(kalender.Options.LokasiTanggalWaktu).innerHTML = "";
+      document
+        .getElementById(kalender.Options.LokasiTanggalWaktu)
+        .appendChild(tanggalWaktu);
+    } else {
+      bagianUtama.appendChild(tanggalWaktu);
+    }
   }
 
-  function AddLabels(){
-    var labels = document.createElement('ul');
-    labels.className = 'cld-labels';
-    var labelsList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    for(var i = 0; i < labelsList.length; i++){
-      var label = document.createElement('li');
-      label.className += "cld-label";
-      label.innerHTML = labelsList[i];
-      labels.appendChild(label);
+  function TambahLabel() {
+    var label = document.createElement("ul");
+    label.className = "cld-labels";
+    var daftarLabel = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+    for (var i = 0; i < daftarLabel.length; i++) {
+      var itemLabel = document.createElement("li");
+      itemLabel.className += "cld-label";
+      itemLabel.innerHTML = daftarLabel[i];
+      label.appendChild(itemLabel);
     }
-    mainSection.appendChild(labels);
+    bagianUtama.appendChild(label);
   }
-  function AddDays(){
-    // Create Number Element
-    function DayNumber(n){
-      var number = document.createElement('p');
-      number.className += "cld-number";
-      number.innerHTML += n;
-      return number;
+
+  function TambahHari() {
+    function NomorHari(n) {
+      var nomor = document.createElement("p");
+      nomor.className += "cld-number";
+      nomor.innerHTML += n;
+      return nomor;
     }
-    var days = document.createElement('ul');
-    days.className += "cld-days";
-    // Previous Month's Days
-    for(var i = 0; i < (calendar.Selected.FirstDay); i++){
-      var day = document.createElement('li');
-      day.className += "cld-day prevMonth";
-      //Disabled Days
-      var d = i%7;
-      for(var q = 0; q < calendar.Options.DisabledDays.length; q++){
-        if(d==calendar.Options.DisabledDays[q]){
-          day.className += " disableDay";
+    var hari = document.createElement("ul");
+    hari.className += "cld-days";
+
+    for (var i = 0; i < kalender.Terpilih.HariPertama; i++) {
+      var hariItem = document.createElement("li");
+      hariItem.className += "cld-day prevMonth";
+      var d = i % 7;
+      for (var q = 0; q < kalender.Options.HariTidakAktif.length; q++) {
+        if (d == kalender.Options.HariTidakAktif[q]) {
+          hariItem.className += " disableDay";
         }
       }
 
-      var number = DayNumber((calendar.Prev.Days - calendar.Selected.FirstDay) + (i+1));
-      day.appendChild(number);
+      var nomor = NomorHari(
+        kalender.Sebelum.Hari - kalender.Terpilih.HariPertama + (i + 1)
+      );
+      hariItem.appendChild(nomor);
 
-      days.appendChild(day);
+      hari.appendChild(hariItem);
     }
-    // Current Month's Days
-    for(var i = 0; i < calendar.Selected.Days; i++){
-      var day = document.createElement('li');
-      day.className += "cld-day currMonth";
-      //Disabled Days
-      var d = (i + calendar.Selected.FirstDay)%7;
-      for(var q = 0; q < calendar.Options.DisabledDays.length; q++){
-        if(d==calendar.Options.DisabledDays[q]){
-          day.className += " disableDay";
+
+    for (var i = 0; i < kalender.Terpilih.Hari; i++) {
+      var hariItem = document.createElement("li");
+      hariItem.className += "cld-day currMonth";
+      var d = (i + kalender.Terpilih.HariPertama) % 7;
+      for (var q = 0; q < kalender.Options.HariTidakAktif.length; q++) {
+        if (d == kalender.Options.HariTidakAktif[q]) {
+          hariItem.className += " disableDay";
         }
       }
-      var number = DayNumber(i+1);
-      // Check Date against Event Dates
-      for(var n = 0; n < calendar.Model.length; n++){
-        var evDate = calendar.Model[n].Date;
-        var toDate = new Date(calendar.Selected.Year, calendar.Selected.Month, (i+1));
-        if(evDate.getTime() == toDate.getTime()){
-          number.className += " eventday";
-          var title = document.createElement('span');
-          title.className += "cld-title";
-          if(typeof calendar.Model[n].Link == 'function' || calendar.Options.EventClick){
-            var a = document.createElement('a');
-            a.setAttribute('href', '#');
-            a.innerHTML += calendar.Model[n].Title;
-            if(calendar.Options.EventClick){
-              var z = calendar.Model[n].Link;
-              if(typeof calendar.Model[n].Link != 'string'){
-                  a.addEventListener('click', calendar.Options.EventClick.bind.apply(calendar.Options.EventClick, [null].concat(z)) );
-                  if(calendar.Options.EventTargetWholeDay){
-                    day.className += " clickable";
-                    day.addEventListener('click', calendar.Options.EventClick.bind.apply(calendar.Options.EventClick, [null].concat(z)) );
-                  }
-              }else{
-                a.addEventListener('click', calendar.Options.EventClick.bind(null, z) );
-                if(calendar.Options.EventTargetWholeDay){
-                  day.className += " clickable";
-                  day.addEventListener('click', calendar.Options.EventClick.bind(null, z) );
+      var nomor = NomorHari(i + 1);
+      for (var n = 0; n < kalender.Model.length; n++) {
+        var evDate = kalender.Model[n].Date;
+        var toDate = new Date(
+          kalender.Terpilih.Tahun,
+          kalender.Terpilih.Bulan,
+          i + 1
+        );
+        if (evDate.getTime() == toDate.getTime()) {
+          nomor.className += " eventday";
+          var judul = document.createElement("span");
+          judul.className += "cld-title";
+          if (
+            typeof kalender.Model[n].Link == "function" ||
+            kalender.Options.KlikEvent
+          ) {
+            var a = document.createElement("a");
+            a.setAttribute("href", "#");
+            a.innerHTML += kalender.Model[n].Title;
+            if (kalender.Options.KlikEvent) {
+              var z = kalender.Model[n].Link;
+              if (typeof kalender.Model[n].Link != "string") {
+                a.addEventListener(
+                  "click",
+                  kalender.Options.KlikEvent.bind.apply(
+                    kalender.Options.KlikEvent,
+                    [null].concat(z)
+                  )
+                );
+                if (kalender.Options.TargetEventSehariPenuh) {
+                  hariItem.className += " clickable";
+                  hariItem.addEventListener(
+                    "click",
+                    kalender.Options.KlikEvent.bind.apply(
+                      kalender.Options.KlikEvent,
+                      [null].concat(z)
+                    )
+                  );
+                }
+              } else {
+                a.addEventListener(
+                  "click",
+                  kalender.Options.KlikEvent.bind(null, z)
+                );
+                if (kalender.Options.TargetEventSehariPenuh) {
+                  hariItem.className += " clickable";
+                  hariItem.addEventListener(
+                    "click",
+                    kalender.Options.KlikEvent.bind(null, z)
+                  );
                 }
               }
-            }else{
-              a.addEventListener('click', calendar.Model[n].Link);
-              if(calendar.Options.EventTargetWholeDay){
-                day.className += " clickable";
-                day.addEventListener('click', calendar.Model[n].Link);
+            } else {
+              a.addEventListener("click", kalender.Model[n].Link);
+              if (kalender.Options.TargetEventSehariPenuh) {
+                hariItem.className += " clickable";
+                hariItem.addEventListener("click", kalender.Model[n].Link);
               }
             }
-            title.appendChild(a);
-          }else{
-            title.innerHTML += '<a href="' + calendar.Model[n].Link + '">' + calendar.Model[n].Title + '</a>';
+            judul.appendChild(a);
+          } else {
+            judul.innerHTML +=
+              '<a href="' +
+              kalender.Model[n].Link +
+              '">' +
+              kalender.Model[n].Title +
+              "</a>";
           }
-          number.appendChild(title);
+          nomor.appendChild(judul);
         }
       }
-      day.appendChild(number);
-      // If Today..
-      if((i+1) == calendar.Today.getDate() && calendar.Selected.Month == calendar.Today.Month && calendar.Selected.Year == calendar.Today.Year){
-        day.className += " today";
+      hariItem.appendChild(nomor);
+      if (
+        i + 1 == kalender.HariIni.getDate() &&
+        kalender.Terpilih.Bulan == kalender.HariIni.Bulan &&
+        kalender.Terpilih.Tahun == kalender.HariIni.Tahun
+      ) {
+        hariItem.className += " today";
       }
-      days.appendChild(day);
+      hari.appendChild(hariItem);
     }
-    // Next Month's Days
-    // Always same amount of days in calander
-    var extraDays = 13;
-    if(days.children.length>35){extraDays = 6;}
-    else if(days.children.length<29){extraDays = 20;}
 
-    for(var i = 0; i < (extraDays - calendar.Selected.LastDay); i++){
-      var day = document.createElement('li');
-      day.className += "cld-day nextMonth";
-      //Disabled Days
-      var d = (i + calendar.Selected.LastDay + 1)%7;
-      for(var q = 0; q < calendar.Options.DisabledDays.length; q++){
-        if(d==calendar.Options.DisabledDays[q]){
-          day.className += " disableDay";
+    var hariTambahan = 13;
+    if (hari.children.length > 35) {
+      hariTambahan = 6;
+    } else if (hari.children.length < 29) {
+      hariTambahan = 20;
+    }
+
+    for (var i = 0; i < hariTambahan - kalender.Terpilih.HariTerakhir; i++) {
+      var hariItem = document.createElement("li");
+      hariItem.className += "cld-day nextMonth";
+      var d = (i + kalender.Terpilih.HariTerakhir + 1) % 7;
+      for (var q = 0; q < kalender.Options.HariTidakAktif.length; q++) {
+        if (d == kalender.Options.HariTidakAktif[q]) {
+          hariItem.className += " disableDay";
         }
       }
 
-      var number = DayNumber(i+1);
-      day.appendChild(number);
+      var nomor = NomorHari(i + 1);
+      hariItem.appendChild(nomor);
 
-      days.appendChild(day);
+      hari.appendChild(hariItem);
     }
-    mainSection.appendChild(days);
+    bagianUtama.appendChild(hari);
   }
-  if(calendar.Options.Color){
-    mainSection.innerHTML += '<style>.cld-main{color:' + calendar.Options.Color + ';}</style>';
-  }
-  if(calendar.Options.LinkColor){
-    mainSection.innerHTML += '<style>.cld-title a{color:' + calendar.Options.LinkColor + ';}</style>';
-  }
-  element.appendChild(mainSection);
 
-  if(calendar.Options.NavShow && calendar.Options.NavVertical){
-    AddSidebar();
+  if (kalender.Options.Warna) {
+    bagianUtama.innerHTML +=
+      "<style>.cld-main{color:" + kalender.Options.Warna + ";}</style>";
   }
-  if(calendar.Options.DateTimeShow){
-    AddDateTime();
+  if (kalender.Options.WarnaLink) {
+    bagianUtama.innerHTML +=
+      "<style>.cld-title a{color:" + kalender.Options.WarnaLink + ";}</style>";
   }
-  AddLabels();
-  AddDays();
+  elemen.appendChild(bagianUtama);
+
+  if (kalender.Options.NavTampil && kalender.Options.NavVertikal) {
+    TambahSidebar();
+  }
+  if (kalender.Options.TanggalWaktuTampil) {
+    TambahTanggalWaktu();
+  }
+  TambahLabel();
+  TambahHari();
 }
 
-function caleandar(el, data, settings){
-  var obj = new Calendar(data, settings);
-  createCalendar(obj, el);
+function kalender(el, data, settings) {
+  var obj = new Kalender(data, settings);
+  buatKalender(obj, el);
 }
