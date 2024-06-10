@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./views/**/*.{html,php}", "./views/*.{html,php}"],
+  content: ["./views/**/*.{html,php}", "./views/*.{html,php}", "./*.{html,php}"],
   theme: {
     extend: {
       colors: {
         white: "#fff",
-        whitesmoke: "#f8f8f8",
+        whitesmoke: "#eee",
         black: "#000",
         lime: "#42ff00",
         red: "#ff0000",
@@ -53,6 +53,9 @@ module.exports = {
         raw: "screen and (max-width: 450px)",
       },
     },
+  },
+  corePlugins: {
+    preflight: false,
   },
   plugins: [],
 };
