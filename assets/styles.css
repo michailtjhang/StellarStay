@@ -122,6 +122,10 @@
   z-index: 3;
 }
 
+.z-10 {
+  z-index: 10;
+}
+
 .m-0 {
   margin: 0px;
 }
@@ -130,12 +134,50 @@
   margin: 1rem;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mt-\[-3px\] {
   margin-top: -3px;
 }
 
 .mt-\[-657px\] {
   margin-top: -657px;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mr-8 {
+  margin-right: 2rem;
+}
+
+.mr-10 {
+  margin-right: 2.5rem;
 }
 
 .box-border {
@@ -148,6 +190,10 @@
 
 .flex {
   display: flex;
+}
+
+.table {
+  display: table;
 }
 
 .hidden {
@@ -254,6 +300,70 @@
   width: 100%;
 }
 
+.w-\[12x66px\] {
+  width: 12x66px;
+}
+
+.w-\[1000px\] {
+  width: 1000px;
+}
+
+.w-\[122px\] {
+  width: 122px;
+}
+
+.w-\[120px\] {
+  width: 120px;
+}
+
+.w-\[1200px\] {
+  width: 1200px;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[90\%\] {
+  width: 90%;
+}
+
+.w-\[100\%\] {
+  width: 100%;
+}
+
+.w-\[100px\] {
+  width: 100px;
+}
+
+.w-\[1100px\] {
+  width: 1100px;
+}
+
+.w-\[1010px\] {
+  width: 1010px;
+}
+
+.w-\[1110px\] {
+  width: 1110px;
+}
+
+.w-\[1199px\] {
+  width: 1199px;
+}
+
+.w-\[1px\] {
+  width: 1px;
+}
+
+.w-\[1001px\] {
+  width: 1001px;
+}
+
+.w-\[12px\] {
+  width: 12px;
+}
+
 .min-w-\[371px\] {
   min-width: 371px;
 }
@@ -288,6 +398,10 @@
 
 .items-end {
   align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
 }
 
 .justify-start {
@@ -356,6 +470,14 @@
 
 .gap-\[8px\] {
   gap: 8px;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .self-stretch {
@@ -428,6 +550,10 @@
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-0 {
@@ -591,6 +717,14 @@
 
 .pt-\[82px\] {
   padding-top: 82px;
+}
+
+.pr-\[px\] {
+  padding-right: px;
+}
+
+.pr-\[61px\] {
+  padding-right: 61px;
 }
 
 .text-left {
@@ -775,6 +909,10 @@ body {
     gap: 29px;
   }
 
+  .mq750\:p-4 {
+    padding: 1rem;
+  }
+
   .mq750\:pl-\[30px\] {
     padding-left: 30px;
   }
@@ -803,5 +941,9 @@ body {
 
   .mq450\:text-xl {
     font-size: 20px;
+  }
+
+  .mq450\:text-sm {
+    font-size: 14px;
   }
 }

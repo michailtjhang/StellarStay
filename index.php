@@ -18,12 +18,10 @@ include_once 'views/template/header.php';
 
     $viewDir = 'views/';
 
-    if ($url == 'home') {
-        include_once $viewDir . 'home.php';
-    } else if (!empty($url)) {
+    if (!empty($url)) {
         include_once $viewDir . $url . '.php';
     } else {
-        include_once $viewDir . 'home.php';
+        include_once $viewDir . 'login.php';
     }
 
     ?>

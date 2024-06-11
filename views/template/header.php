@@ -45,7 +45,7 @@
                     class="self-stretch h-[500px] flex flex-col items-start justify-start pt-[550px] px-[3px] pb-0 box-border gap-[180px] mq750:pt-[232px] mq750:box-border mq1050:pt-[357px] mq1050:box-border">
                     <div
                         class="mt-[-657px] flex flex-col items-start justify-start py-[30px] px-0 gap-[50px] shrink-0 [debug_commit:69da668]">
-                        <a href="" class="flex flex-row items-start justify-start text-firebrick no-underline">
+                        <a href="index.php?url=dashboard" class="flex flex-row items-start justify-start text-firebrick no-underline">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative" loading="lazy" alt=""
                                     src="../assets/image/dashboard.svg" />
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href=""
+                        <a href="index.php?url=laporan"
                             class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt=""

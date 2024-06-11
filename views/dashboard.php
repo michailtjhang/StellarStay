@@ -1,8 +1,3 @@
-<?php
-$today = date("Y-m-d");
-$currMonth = date("M-Y", strtotime($today));
-$firstDayOfMonth = date("Y-m-01", strtotime($currMonth));
-?>
 <div class="flex flex-col items-start justify-start gap-[7px]">
     <h1
         class="m-0 h-[57px] relative text-inherit font-bold font-inherit inline-block z-[1] mq1050:text-[30px] mq450:text-[23px]">
