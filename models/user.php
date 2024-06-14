@@ -11,7 +11,7 @@ class User
 
     public function cekLogin($data)
     {
-        $sql = "SELECT * FROM user WHERE username = ? AND pass = SHA1(MD5(SHA1(?))) ";
+        $sql = "SELECT * FROM user WHERE email = ? AND password = SHA1(MD5(SHA1(?))) ";
 
         $stmt = $this->koneksi->prepare($sql);
         $results = $stmt->execute($data);
