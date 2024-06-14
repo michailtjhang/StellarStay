@@ -3,13 +3,13 @@
 <div class="flex flex-col items-start justify-start gap-[7px]">
     <h1
         class="m-0 h-[57px] relative text-inherit font-bold font-inherit inline-block z-[1] mq1050:text-[30px] mq450:text-[23px]">
-        Dashboard
+        Table Laporan
     </h1>
     <h3 class="m-0 relative text-xl font-normal font-inherit text-gray-100 z-[1] mq450:text-[16px]">
-        Welcome back mas arya
+        
     </h3>
 </div>
-<div class="w-full max-w-screen-lg flex flex-col items-start gap-4 text-6xl font-inter mr-4">
+<div class="w-[1066px] max-w-full flex flex-col items-start gap-4 text-6xl font-inter mr-4">
     <div class="w-full rounded-xl mr-10 bg-white p-6 mq750:p-4">
 
         <table id="tableData" class="display w-full text-sm">

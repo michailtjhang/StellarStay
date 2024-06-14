@@ -39,7 +39,7 @@
                         </div>
                         <div
                             class="flex flex-row items-start justify-start py-0 px-[17px] mt-[-3px] text-sm text-black">
-                            <div class="relative z-[3]">16 Rooms</div>
+                            <div class="relative z-[3]">16 Rooms <br> -> 12 reservation</div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div
                             class="flex flex-row items-start justify-start py-0 px-[17px] mt-[-3px] text-sm text-black">
-                            <div class="relative z-[2]">9 Rooms</div>
+                            <div class="relative z-[2]">9 Rooms <br> -> 7 reservation</div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div
                             class="flex flex-row items-start justify-start py-0 px-[17px] mt-[-3px] text-sm text-black">
-                            <div class="relative z-[2]">1 Rooms</div>
+                            <div class="relative z-[2]">1 Rooms <br> -> 1 reservation</div>
                         </div>
                     </div>
                 </div>

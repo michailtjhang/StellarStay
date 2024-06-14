@@ -14,11 +14,13 @@ include_once 'views/template/header.php';
     </div>
 
     <?php
-    $url = !isset($_GET['url']) ? 'home' : $_GET['url'];
+    $url = !isset($_GET['url']) ? 'dashboard' : $_GET['url'];
 
     $viewDir = 'views/';
 
-    if (!empty($url)) {
+    if ($url == 'dashboard') {
+        include_once $viewDir . 'dashboard.php';
+    } else if (!empty($url)) {
         include_once $viewDir . $url . '.php';
     } else {
         include_once $viewDir . 'login.php';

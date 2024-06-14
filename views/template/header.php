@@ -17,11 +17,11 @@
     <div
         class="w-full relative bg-white overflow-hidden flex flex-col items-start justify-start pt-[31px] pb-0 pr-0 pl-[23px] box-border gap-[15px] leading-[normal] tracking-[normal] mq750:gap-[17px]">
         <header
-            class="w-[1329px] flex flex-row items-start justify-start py-0 px-[22px] box-border max-w-full text-left text-xs text-black font-poppins">
-            <div class="flex-1 flex flex-row items-start justify-between max-w-full gap-[20px]">
+            class="w-[1459px] flex flex-row items-start justify-start py-0 px-[22px] box-border max-w-full text-left text-xs text-black font-poppins">
+            <div class="flex-1 flex flex-row items-end justify-between  gap-[20px]">
                 <img class="h-[49px] w-[62.8px] relative" loading="lazy" alt="" src="../assets/image/logo.svg" />
 
-                <div class="w-[225px] flex flex-col items-start justify-start pt-[3px] px-0 pb-0 box-border">
+                <div class="w-[225px] flex flex-col items-end justify-end pt-[3px] px-0 pb-0 box-border">
                     <div class="self-stretch flex flex-row items-start justify-between gap-[20px]">
                         <div class="flex flex-col items-start justify-start py-[16px] pb-0">
                             <img class="w-[24px] h-[24px] relative overflow-hidden shrink-0" loading="lazy" alt=""
@@ -44,40 +44,41 @@
                 <div
                     class="self-stretch h-[500px] flex flex-col items-start justify-start pt-[550px] px-[3px] pb-0 box-border gap-[180px] mq750:pt-[232px] mq750:box-border mq1050:pt-[357px] mq1050:box-border">
                     <div
-                        class="mt-[-657px] flex flex-col items-start justify-start py-[30px] px-0 gap-[50px] shrink-0 [debug_commit:69da668]">
-                        <a href="index.php?url=dashboard" class="flex flex-row items-start justify-start text-firebrick no-underline">
+                        class="mt-[-597px] flex flex-col items-start justify-start py-[30px] px-0 gap-[50px] shrink-0 [debug_commit:69da668]">
+                        <a href="index.php" class="flex flex-row items-start text-firebrick no-underline">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative" loading="lazy" alt=""
                                     src="../assets/image/dashboard.svg" />
-
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
-                                    <a class="[text-decoration:none] relative font-bold text-[inherit]">Dashboard</a>
+                                    <span
+                                        class="[text-decoration:none] relative font-bold text-[inherit]">Dashboard</span>
                                 </div>
                             </div>
                         </a>
-                        <a href=""
+
+                        <a href="index.php?url=pages/penujung/dtPenujung"
                             class="flex flex-row items-start justify-start py-0 pr-5 pl-0 text-black no-underline">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt=""
                                     src="../assets/image/database.svg" />
-
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
-                                    <div class="relative">Data</div>
+                                    <span class="relative">Data</span>
                                 </div>
                             </div>
                         </a>
+
                         <a href="index.php?url=laporan"
                             class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt=""
                                     src="../assets/image/file.svg" />
-
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
-                                    <div class="relative">Laporan</div>
+                                    <span class="relative">Laporan</span>
                                 </div>
                             </div>
                         </a>
                     </div>
+
                     <div class="flex flex-row items-start justify-start py-0 px-0.5">
                         <div class="flex flex-col items-start justify-start gap-[31px] shrink-0 [debug_commit:69da668]">
                             <a href=""
