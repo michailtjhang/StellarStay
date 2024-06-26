@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -42,9 +43,9 @@
             <div
                 class="w-[123px] flex flex-col items-start justify-start pt-[82px] px-0 pb-0 box-border mq750:pt-[53px] mq750:box-border mq1050:hidden">
                 <div
-                    class="self-stretch h-[500px] flex flex-col items-start justify-start pt-[550px] px-[3px] pb-0 box-border gap-[180px] mq750:pt-[232px] mq750:box-border mq1050:pt-[357px] mq1050:box-border">
+                    class="self-stretch flex flex-col items-start justify-start pt-[550px] px-[3px] pb-0 box-border gap-[180px] mq750:pt-[232px] mq750:box-border mq1050:pt-[357px] mq1050:box-border">
                     <div
-                        class="mt-[-597px] flex flex-col items-start justify-start py-[30px] px-0 gap-[50px] shrink-0 [debug_commit:69da668]">
+                        class="mt-[-597px] flex flex-col items-start justify-start py-[30px] px-0  shrink-0 [debug_commit:69da668]">
                         <a href="index.php" class="flex flex-row items-start text-firebrick no-underline">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative" loading="lazy" alt=""
@@ -56,19 +57,40 @@
                             </div>
                         </a>
 
-                        <a href="index.php?url=pages/penujung/dtPenujung"
-                            class="flex flex-row items-start justify-start py-0 pr-5 pl-0 text-black no-underline">
-                            <div class="flex flex-row items-start justify-start gap-[12px]">
+                        <div
+                            class="flex flex-row items-start justify-start py-0 pr-5 pl-0 text-black no-underline mt-[50px]">
+                            <button type="button" class="flex flex-row items-start justify-start gap-[12px]"
+                                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt=""
                                     src="../assets/image/database.svg" />
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
                                     <span class="relative">Data</span>
                                 </div>
-                            </div>
-                        </a>
+                                <svg class="w-3 h-3 align-center" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <ul id="dropdown-example" class="hidden z-10 py-2 space-y-2 mt">
+                            <li>
+                                <a href="#"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
+                            </li>
+                        </ul>
+
 
                         <a href="index.php?url=laporan"
-                            class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline">
+                            class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[50px]">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt=""
                                     src="../assets/image/file.svg" />
@@ -79,7 +101,7 @@
                         </a>
                     </div>
 
-                    <div class="flex flex-row items-start justify-start py-0 px-0.5">
+                    <div class="flex mt-[-170px] absolute flex-row items-start justify-start py-0 px-0.5">
                         <div class="flex flex-col items-start justify-start gap-[31px] shrink-0 [debug_commit:69da668]">
                             <a href=""
                                 class="flex flex-row items-start justify-start py-0 pr-0.5 pl-0 gap-[16px] text-black no-underline">

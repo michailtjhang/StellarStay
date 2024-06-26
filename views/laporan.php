@@ -1,4 +1,9 @@
-<link href="../assets/DataTables/datatables.min.css" rel="stylesheet">
+<!-- ======================== datatable ========================= -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+<!-- ======================== Font Awesome ========================= -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="flex flex-col items-start justify-start gap-[7px]">
     <h1
@@ -6,7 +11,7 @@
         Table Laporan
     </h1>
     <h3 class="m-0 relative text-xl font-normal font-inherit text-gray-100 z-[1] mq450:text-[16px]">
-        
+
     </h3>
 </div>
 <div class="w-[1066px] max-w-full flex flex-col items-start gap-4 text-6xl font-inter mr-4">
@@ -106,8 +111,9 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="../assets/DataTables/datatables.min.js"></script>
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 <script>
     $(document).ready(function () {

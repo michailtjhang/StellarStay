@@ -7,7 +7,7 @@
         Welcome back mas arya
     </h3>
 </div>
-<div class="w-[1066px] flex flex-col items-start justify-start gap-[18px] max-w-full text-6xl font-inter">
+<div class="w-[1066px] flex flex-col items-start justify-start gap-[18px] max-w-full text-2xl font-inter">
     <div
         class="self-stretch flex flex-row items-end justify-start gap-[116px] max-w-full mq750:gap-[29px] mq1050:flex-wrap mq1050:gap-[58px]">
         <div
@@ -23,19 +23,19 @@
                 </div>
             </div>
             <div class="flex flex-col items-start justify-start gap-[25px] text-mini text-gray-200">
-                <div class="flex flex-row items-start justify-start pt-0 px-0 pb-[38px] text-6xl text-black">
-                    <h2
+                <div class="flex flex-row items-start justify-start pt-0 px-0 pb-[18px] text-2xl text-black">
+                    <h5
                         class="m-0 h-[30px] relative text-inherit font-normal font-inherit inline-block z-[2] mq450:text-xl">
                         This month
-                    </h2>
+                    </h5>
                 </div>
                 <div class="flex flex-row items-start justify-start py-0 pr-0 pl-2">
                     <div class="flex flex-col items-start justify-start">
-                        <div class="flex flex-row items-start justify-start gap-[5px]">
+                        <div class="flex flex-row items-start justify-start gap-[5px] text-black">
                             <div class="flex flex-col items-start justify-start pt-[3px] px-0 pb-0">
                                 <div class="w-3 h-3 relative rounded-[50%] bg-red z-[2]"></div>
                             </div>
-                            <div class="relative z-[2]">Superior rooms</div>
+                            <p class="relative z-[2]">Superior rooms</p>
                         </div>
                         <div
                             class="flex flex-row items-start justify-start py-0 px-[17px] mt-[-3px] text-sm text-black">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="flex flex-row items-start justify-start py-0 pr-3 pl-2">
                     <div class="flex flex-col items-start justify-start">
-                        <div class="flex flex-row items-start justify-start gap-[5px]">
+                        <div class="flex flex-row items-start justify-start gap-[5px] text-black">
                             <div class="flex flex-col items-start justify-start pt-[3px] px-0 pb-0">
                                 <div class="w-3 h-3 relative rounded-[50%] bg-lime z-[2]"></div>
                             </div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="flex flex-row items-start justify-start py-0 px-2">
                     <div class="flex flex-col items-start justify-start">
-                        <div class="flex flex-row items-start justify-start gap-[5px]">
+                        <div class="flex flex-row items-start justify-start gap-[5px] text-black">
                             <div class="flex flex-col items-start justify-start pt-[3px] px-0 pb-0">
                                 <div class="w-3 h-3 relative rounded-[50%] bg-gold z-[2]"></div>
                             </div>
