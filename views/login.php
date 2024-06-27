@@ -1,38 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
     <title>Login</title>
-    <script defer src="../assets/js/login.js"></script> 
+
+    <link rel="icon" type="image/x-icon" href="../assets/image/logo.svg">
+
+    <link rel="stylesheet" href="../assets/global.css" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
+
 <body>
-    <form id="loginForm">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-            <a href="index.html" class="">
-                <h3 class="text-primary"><i class="fa fa-truck me-2"></i>LogistikQ</h3>
-            </a>
-            <h3>Sign In</h3>
+    <form action="views/loginController.php" method="POST" class="m-0 w-full h-[593px] relative bg-white overflow-hidden leading-[normal] tracking-[normal]">
+        <img class="absolute h-full top-[0px] bottom-[0px] left-[690px] max-h-full w-[470px] object-cover" loading="lazy" alt="" src="../assets/image/Login.svg" />
+
+        <h1 class="m-0 absolute top-[47px] left-[44px] text-[45px] font-bold font-poppins text-firebrick text-left inline-block w-[612px] mq450:text-[27px] mq750:text-[36px]">
+            Selamat Datang di Dashboard Hotel Kami
+        </h1>
+        <h2 class="m-0 absolute top-[190px] left-[44px] text-[18px] font-normal font-poppins text-black text-left inline-block w-[690px] z-[1] mq450:text-[20px]">
+            Masuk untuk mengelola reservasi kamar hotel dengan mudah
+        </h2>
+        <input class="absolute top-[300px] left-[44px] rounded-8xs bg-white box-border w-[345px] flex flex-row items-start justify-start p-2.5 border-[1px] border-solid border-black" placeholder="Username" type="text" name="username" />
+
+        <input class="absolute top-[400px] left-[44px] rounded-8xs bg-white box-border w-[345px] flex flex-row items-start justify-start p-2.5 border-[1px] border-solid border-black" placeholder="Password" type="password" name="password" />
+
+        <div class="absolute top-[275px] left-[44px] text-mini font-poppins text-black text-left inline-block min-w-[78px]">
+            Username
         </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
-            <label for="floatingInput">Username</label>
+        <div class="absolute top-[375px] left-[44px] text-mini font-poppins text-black text-left inline-block min-w-[73px]">
+            Password
         </div>
-        <div class="form-floating mb-4">
-            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
-        <div class="d-flex align-items-center justify-content-between mb-4">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <button type="submit" value="submit" class="[border:none] py-2.5 px-10 bg-red-200 absolute top-[529px] left-[44px] rounded-8xs flex flex-row items-start justify-start hover:bg-red-100">
+            <div class="relative text-mini font-poppins text-black text-left inline-block min-w-[53px]">
+                LOG-IN
             </div>
-            <a href="">Forgot Password</a>
-        </div>
-        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-        <p class="text-center mb-0">Don't have an Account? <a href="register.php">Sign Up</a></p>
+        </button>
     </form>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
 </body>
+
 </html>
