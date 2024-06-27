@@ -21,11 +21,19 @@ function getTitle()
 
     <link rel="icon" type="image/x-icon" href="../assets/image/logo.svg">
 
+    <!-- ======================================== Font Awesome ========================= -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- ======================================== Tailwind CSS ========================= -->
     <link rel="stylesheet" href="../assets/global.css" />
     <link rel="stylesheet" href="../assets/styles.css" />
+
+    <!-- ======================================== Fonts ========================= -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" />
+
+    <!-- ======================================== Flowbite CSS ========================= -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 
@@ -62,7 +70,7 @@ function getTitle()
                             </div>
                         </a>
 
-                        <div class="flex flex-row items-start justify-start py-0 pr-5 pl-0 text-black no-underline mt-[50px]">
+                        <div class="flex flex-row items-start justify-start py-0 pr-5 pl-0 text-black no-underline mt-[25px]">
                             <button type="button" class="flex flex-row items-start justify-start gap-[12px]" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/database.svg" />
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
@@ -73,20 +81,20 @@ function getTitle()
                                 </svg>
                             </button>
                         </div>
-                        <ul id="dropdown-example" class="hidden z-10 py-2 space-y-2 mt">
+                        <ul id="dropdown-example" class="hidden z-10 py-2 space-y-2 mb-0">
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                                <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Reservation</a>
                             </li>
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+                                <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Room</a>
                             </li>
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
+                                <a href="index.php?url=pages/penujung/dtPenujung" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Customer</a>
                             </li>
                         </ul>
 
 
-                        <a href="index.php?url=laporan" class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[50px]">
+                        <a href="index.php?url=laporan" class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[25px]">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/file.svg" />
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
