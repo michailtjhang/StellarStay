@@ -25,8 +25,8 @@ function getTitle()
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- ======================================== Tailwind CSS ========================= -->
-    <link rel="stylesheet" href="../assets/global.css" />
-    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
 
     <!-- ======================================== Fonts ========================= -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
@@ -70,6 +70,15 @@ function getTitle()
                             </div>
                         </a>
 
+                        <a href="#" class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[25px]">
+                            <div class="flex flex-row items-start justify-start gap-[12px]">
+                                <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/file.svg" />
+                                <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
+                                    <span class="relative">Pemesanan</span>
+                                </div>
+                            </div>
+                        </a>
+
                         <div class="flex flex-row items-start justify-start py-0 pr-5 pl-0 text-black no-underline mt-[25px]">
                             <button type="button" class="flex flex-row items-start justify-start gap-[12px]" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/database.svg" />
@@ -89,7 +98,7 @@ function getTitle()
                                 <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Room</a>
                             </li>
                             <li>
-                                <a href="index.php?url=pages/penujung/dtPenujung" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Customer</a>
+                                <a href="index.php?url=pages/user/dtUser" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User</a>
                             </li>
                         </ul>
 
@@ -104,8 +113,8 @@ function getTitle()
                         </a>
                     </div>
 
-                    <div class="flex mt-[-170px] absolute flex-row items-start justify-start py-0 px-0.5">
-                        <div class="flex flex-col items-start justify-start gap-[31px] shrink-0 [debug_commit:69da668]">
+                    <div class="flex mt-[-130px] absolute flex-row items-start justify-start py-0 px-0.5">
+                        <div class="flex flex-col items-start justify-start gap-[24px] shrink-0 [debug_commit:69da668]">
                             <a href="" class="flex flex-row items-start justify-start py-0 pr-0.5 pl-0 gap-[16px] text-black no-underline">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/settings.svg" />
 
@@ -113,7 +122,7 @@ function getTitle()
                                     <div class="relative">Setting</div>
                                 </div>
                             </a>
-                            <a href="" class="flex flex-row items-start justify-start gap-[16px] text-black no-underline">
+                            <a href="../logout.php" class="flex flex-row items-start justify-start gap-[16px] text-black no-underline">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/log-out.svg" />
 
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">

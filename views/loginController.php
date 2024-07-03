@@ -18,5 +18,5 @@ if (!empty($rs)) {
 
     header('location:../admin/index.php?url=dashboard');
 } else {
-    header('location:index.php');
+    header('location:../');
 }
