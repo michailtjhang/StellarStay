@@ -1,4 +1,4 @@
 node_modules/
 .env
 vendor/
-assets/styles.css
+assets/css/styles.css
