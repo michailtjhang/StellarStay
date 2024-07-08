@@ -92,10 +92,13 @@ function getTitle()
                         </div>
                         <ul id="dropdown-example" class="hidden z-10 py-2 space-y-2 mb-0">
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Reservation</a>
+                                <a href="index.php?url=pages/kamar/dtKamar" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Room</a>
                             </li>
                             <li>
-                                <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Room</a>
+                                <a href="index.php?url=pages/tamu/dtTamu" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Penunjung</a>
+                            </li>
+                            <li>
+                                <a href="index.php?url=pages/travel/dtTravel" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Travel</a>
                             </li>
                             <li>
                                 <a href="index.php?url=pages/user/dtUser" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User</a>

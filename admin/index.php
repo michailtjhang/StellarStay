@@ -5,7 +5,10 @@ session_start();
 include_once '../database/koneksi.php';
 
 // models
-include_once '../app/models/user.php';
+include_once 'app/models/user.php';
+include_once 'app/models/kamar.php';
+include_once 'app/models/tamu.php';
+include_once 'app/models/travel.php';
 
 $sesi = $_SESSION['MEMBER'];
 if (isset($sesi)) {
@@ -13,19 +16,18 @@ if (isset($sesi)) {
     $url = !isset($_GET['url']) ? 'dashboard' : strtolower($_GET['url']);
 
     // Menentukan judul halaman dinamis
-    switch ($url) {
-        case 'dashboard':
-            $pageTitle = "Dashboard - Your Site Name";
-            break;
-        case 'laporan':
-            $pageTitle = "Laporan - Your Site Name";
-            break;
-        case 'pages/penujung/dtpenujung':
-            $pageTitle = "Data Penujung - Your Site Name";
-            break;
-        default:
-            $pageTitle = "HomePage - Your Site Name";
-    }
+    // Array asosiatif untuk judul halaman dinamis
+    $pageTitles = [
+        'dashboard' => 'Dashboard - Your Site Name',
+        'laporan' => 'Laporan - Your Site Name',
+        'pages/kamar/dtkamar' => 'Data Room - Your Site Name',
+        'pages/tamu/dttamu' => 'Data Penunjung - Your Site Name',
+        'pages/travel/dttravel' => 'Data Travel Online - Your Site Name',
+        'pages/user/dtuser' => 'Data User - Your Site Name'
+    ];
+
+    // Menentukan judul halaman berdasarkan URL
+    $pageTitle = isset($pageTitles[$url]) ? $pageTitles[$url] : 'HomePage - Your Site Name';
 
     include_once 'template/header.php';
 

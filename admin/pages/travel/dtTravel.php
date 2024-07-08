@@ -1,7 +1,7 @@
 <?php
 
-$model =  new kamar();
-$data_kamar = $model->dataKamar();
+$model =  new travel();
+$data_travel = $model->dataTravel();
 
 ?>
 
@@ -12,7 +12,7 @@ $data_kamar = $model->dataKamar();
 
 <div class="flex flex-col items-start justify-start gap-[7px]">
     <h1 class="mt-4 h-[47px] relative text-inherit font-bold font-inherit inline-block z-[1] mq1050:text-[30px] mq450:text-[23px]">
-        Table Data Kamar
+        Table Data Travel
     </h1>
     <h3 class="m-0 relative text-xl font-normal font-inherit text-gray-100 z-[1] mq450:text-[16px]">
         <nav class="flex" aria-label="Breadcrumb">
@@ -30,7 +30,7 @@ $data_kamar = $model->dataKamar();
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                         </svg>
-                        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Data Kamar</span>
+                        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Data Travel</span>
                     </div>
                 </li>
             </ol>
@@ -40,7 +40,7 @@ $data_kamar = $model->dataKamar();
 </div>
 <div class="w-[1066px] max-w-full flex flex-col items-start gap-4  font-inter mr-4">
     <div class="w-full rounded-xl mr-10 bg-white p-6 mq750:p-4">
-        <a href="index.php?url=pages/kamar/kamar_form" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mb-8">
+        <a href="index.php?url=pages/travel/travel_form" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mb-8">
             Tambah
             <i class="fa-solid fa-plus ms-2"></i>
         </a>
@@ -48,27 +48,23 @@ $data_kamar = $model->dataKamar();
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Tipe Kamar</th>
-                    <th>Hari</th>
-                    <th>Harga</th>
-                    <th class="text-center">Aksi</th>
+                    <th>Nama Agent Travel</th>
+                    <th>Komisi</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $id = 1; ?>
-                <?php foreach ($data_kamar as $row) : ?>
+                <?php foreach ($data_travel as $row) : ?>
                     <tr>
                         <td><?php echo $id++ ?></td>
-                        <td><?php echo $row['tipe'] ?></td>
-                        <td><?php echo $row['hari'] ?></td>
-                        <td>Rp. <?php echo number_format($row['harga'], 0, ',', '.') ?></td>
-                        <td class="text-center">
-                            <form action="app/controllers/kamarController.php" method="POST">
-                                <a href="index.php?url=Pages/kamar/kamar_form&idedit=<?= $row['id'] ?>">
-                                    <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:focus:ring-yellow-900"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <td><?php echo $row['nama_travel'] ?></td>
+                        <td><?php echo $row['komisi'] ?></td>
+                        <td>
+                            <form action="Pages/user/user_controller.php" method="POST">
+                                <a href="index.php?url=Pages/user/detail_user&id=<?= $row['id'] ?>">
+                                    <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><i class="fa-solid fa-trash"></i></button>
                                 </a>
-                                <button type="submit" name="proses" value="hapus" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus kamar <?= $row['tipe'] ?> ?')"><i class="fa-solid fa-trash"></i></button>
-                                <input type="hidden" name="idx" value="<?= $row['id'] ?>">
                             </form>
                         </td>
                     </tr>

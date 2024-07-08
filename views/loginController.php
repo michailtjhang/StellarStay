@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once '../database/koneksi.php'; // Disesuaikan dengan path yang benar
-include_once '../app/models/level.php'; // Disesuaikan dengan path yang benar
+include_once '../models/level.php'; // Disesuaikan dengan path yang benar
 
 $unama = $_POST['username'];
 $password = $_POST['password'];

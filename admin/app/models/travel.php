@@ -1,6 +1,6 @@
 <?php
 
-class user
+class travel
 {
     private $koneksi;
     public function __construct()
@@ -9,10 +9,10 @@ class user
         $this->koneksi = $dbh;
     }
 
-    public function dataUser()
+    public function dataTravel()
     {
         // mengambil dan melihat table jenis_produk
-        $sql = "SELECT * FROM user";
+        $sql = "SELECT * FROM travel_online";
 
         // menggunakan mekanisme prepere statement PDO
         $ps = $this->koneksi->prepare($sql);
@@ -22,10 +22,10 @@ class user
         return $rs;
     }
 
-    public function getUser($id)
+    public function getTravel($id)
     {
         // mengambil dan melihat table jenis_produk
-        $sql = "SELECT * FROM user where id = ?";
+        $sql = "SELECT * FROM travel_online where id = ?";
 
         // menggunakan mekanisme prepere statement PDO
         $ps = $this->koneksi->prepare($sql);
@@ -37,15 +37,15 @@ class user
 
     public function simpan($data)
     {
-        $sql = "INSERT INTO user (firstname, lastname, username, password, email, role)
-        VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO travel_online (nama_travel, komisi)
+        VALUES (?,?)";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute($data);
     }
 
     public function ubah($data)
     {
-        $sql = "UPDATE user SET firstname=?, lastname=?, username=?, password=?, email=?, role=?
+        $sql = "UPDATE travel_online SET nama_travel=?, komisi=?
         WHERE id=?";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute($data);
@@ -53,7 +53,7 @@ class user
 
     public function hapus($data)
     {
-        $sql = "DELETE FROM user WHERE id=?";
+        $sql = "DELETE FROM travel_online WHERE id=?";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute($data);
     }
