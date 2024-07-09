@@ -4,7 +4,7 @@
         Dashboard
     </h1>
     <h3 class="m-0 relative text-xl font-normal font-inherit text-gray-100 z-[1] mq450:text-[16px]">
-        Welcome back mas arya
+        Welcome <?php echo $sesi['username']; ?>
     </h3>
 </div>
 <div class="w-[1066px] flex flex-col items-start justify-start gap-[18px] max-w-full text-2xl font-inter">

@@ -72,8 +72,8 @@ $data_kamar = $model->dataKamar();
                             </form>
                         </td>
                     </tr>
-                    <?php $id++; ?>
                 <?php endforeach; ?>
+                <?php $id++; ?>
             </tbody>
         </table>
 

@@ -37,10 +37,11 @@ class travel
 
     public function simpan($data)
     {
+        $kodeAuto = $this->kodeAuto();
         $sql = "INSERT INTO travel_online (nama_travel, komisi)
         VALUES (?,?)";
         $ps = $this->koneksi->prepare($sql);
-        $ps->execute($data);
+        $ps->execute(array_merge([$kodeAuto], $data));
     }
 
     public function ubah($data)
@@ -56,5 +57,14 @@ class travel
         $sql = "DELETE FROM travel_online WHERE id=?";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute($data);
+    }
+
+    public function kodeAuto()
+    {
+        $sql = "SELECT MAX(CAST(SUBSTRING(id, 2) AS UNSIGNED)) as max_id FROM travel_online";
+        $rs = $this->koneksi->query($sql)->fetch();
+
+        $kode = ($rs['max_id'] ?? 0) + 1;
+        return "TRV" . sprintf("%03d", $kode);
     }
 }

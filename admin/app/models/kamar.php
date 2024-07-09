@@ -61,14 +61,10 @@ class kamar
 
     public function kodeAuto()
     {
-        $sql = "SELECT max(id) as id FROM kamar";
-        $ps = $this->koneksi->prepare($sql);
-        $ps->execute();
-        $rs = $ps->fetch();
-        $kode = $rs['id'];
-        $kode++;
-        $ket = "KMR";
-        $kodeAuto = $ket . sprintf("%03s", $kode);
-        return $kodeAuto;
+        $sql = "SELECT MAX(CAST(SUBSTRING(id, 2) AS UNSIGNED)) as max_id FROM kamar";
+        $rs = $this->koneksi->query($sql)->fetch();
+
+        $kode = ($rs['max_id'] ?? 0) + 1;
+        return "KMR" . sprintf("%03d", $kode);
     }
 }

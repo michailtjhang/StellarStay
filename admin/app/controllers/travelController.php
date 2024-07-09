@@ -1,19 +1,17 @@
 <?php
 include_once '../../../database/koneksi.php';
-include_once '../models/kamar.php';
+include_once '../models/travel.php';
 
 //tangkap reuest
-$tipe = htmlspecialchars($_POST['tipe']);
-$hari = htmlspecialchars($_POST['hari']);
-$harga = htmlspecialchars($_POST['harga']);
+$nama = htmlspecialchars($_POST['nama']);
+$komisi = htmlspecialchars($_POST['komisi']);
 
 $data = [
-    $tipe,
-    $hari,
-    $harga
+    $nama,
+    $komisi
 ];
 
-$model = new kamar();
+$model = new travel();
 $tombol = $_REQUEST['proses'];
 
 switch ($tombol) {
@@ -30,7 +28,7 @@ switch ($tombol) {
         $model->hapus($data);
         break;
     default;
-        header('location:../../index.php?url=Pages/kamar/dtKamar');
+        header('location:../../index.php?url=Pages/user/dtUser');
         break;
 }
-header('location:../../index.php?url=Pages/kamar/dtKamar');
+header('location:../../index.php?url=Pages/user/dtUser');

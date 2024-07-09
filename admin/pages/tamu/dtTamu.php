@@ -65,15 +65,17 @@ $data_tamu = $model->dataTamu();
                         <td><?php echo $row['no_telp'] ?></td>
                         <td><?php echo $row['email'] ?></td>
                         <td>
-                            <form action="Pages/user/user_controller.php" method="POST">
-                                <a href="index.php?url=Pages/user/detail_user&id=<?= $row['id'] ?>">
-                                    <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><i class="fa-solid fa-trash"></i></button>
+                            <form action="app/controllers/tamuController.php" method="POST">
+                                <a href="index.php?url=Pages/tamu/tamu_form&idedit=<?= $row['id'] ?>">
+                                    <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:focus:ring-yellow-900"><i class="fa-solid fa-pen-to-square"></i></button>
                                 </a>
+                                <button type="submit" name="proses" value="hapus" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus kamar <?= $row['tipe'] ?> ?')"><i class="fa-solid fa-trash"></i></button>
+                                <input type="hidden" name="idx" value="<?= $row['id'] ?>">
                             </form>
                         </td>
                     </tr>
-                    <?php $id++; ?>
                 <?php endforeach; ?>
+                <?php $id++; ?>
             </tbody>
         </table>
 

@@ -50,7 +50,7 @@ function getTitle()
                         </div>
                         <div class="w-[147px] flex flex-row items-start justify-start gap-[8px]">
                             <div class="flex-1 flex flex-col items-start justify-start pt-[16.5px] px-0 pb-0">
-                                <a class="[text-decoration:none] relative text-[inherit] whitespace-nowrap">Mas Arya</a>
+                                <a class="[text-decoration:none] relative text-[inherit] whitespace-nowrap"><?php echo $sesi['username']; ?></a>
                             </div>
                             <img class="h-[51px] w-[51px] relative rounded-[50%] object-cover" alt="" src="../assets/image/profile-user.svg" />
                         </div>
