@@ -38,8 +38,8 @@ class tamu
     public function simpan($data)
     {
         $kodeAuto = $this->kodeAuto();
-        $sql = "INSERT INTO tamu (nama, no_ktp, no_telp, email)
-        VALUES (?,?,?,?)";
+        $sql = "INSERT INTO tamu (id, nama, no_ktp, no_telp, email)
+        VALUES (?,?,?,?,?)";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute(array_merge([$kodeAuto], $data));
     }

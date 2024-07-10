@@ -28,7 +28,7 @@ switch ($tombol) {
         $model->hapus($data);
         break;
     default;
-        header('location:../../index.php?url=Pages/user/dtUser');
+        header('location:../../index.php?url=Pages/travel/dtTravel');
         break;
 }
-header('location:../../index.php?url=Pages/user/dtUser');
+header('location:../../index.php?url=Pages/travel/dtTravel');

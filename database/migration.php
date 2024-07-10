@@ -35,8 +35,8 @@ try {
             id CHAR(6) PRIMARY KEY,
             nama VARCHAR(30) NOT NULL,
             no_ktp VARCHAR(50) UNIQUE NOT NULL,
-            no_telp VARCHAR(50) UNIQUE NOT NULL,
-            email VARCHAR(30) NOT NULL
+            no_telp VARCHAR(50) UNIQUE NULL,
+            email VARCHAR(30) NULL
         )";
         $dbh->exec($sqlTableTamu);
 
@@ -62,7 +62,7 @@ try {
             id CHAR(6) PRIMARY KEY,
             tanggal_checkin DATE NOT NULL,
             tanggal_checkout DATE NOT NULL,
-            jumlah_tamu INT(3) NOT NULL,
+            jumlah_kamar INT(3) NOT NULL,
             tipe_tamu ENUM('Perseorangan', 'Rombongan', 'Travel_Online') NOT NULL,
             idTamu CHAR(6) NOT NULL,
             idKamar CHAR(6) NOT NULL,

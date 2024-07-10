@@ -1,3 +1,10 @@
+<?php
+
+$model =  new reservasi();
+$data_reservasi = $model->dataReservasi();
+
+?>
+
 <!-- ======================== datatable ========================= -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 <!-- ======================== Font Awesome ========================= -->
@@ -11,7 +18,7 @@
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="index.php" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                         </svg>
@@ -35,96 +42,48 @@
     <div class="w-full rounded-xl mr-10 bg-white p-6 mq750:p-4">
         <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 mb-8">
             PDF
-            <i class="fa-solid fa-file-pdf ms-2"  ></i>
+            <i class="fa-solid fa-file-pdf ms-2"></i>
         </button>
         <table id="tableData" class="display w-full text-sm">
             <thead>
                 <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
+                    <th>#</th>
+                    <th>Tanggal Checkin</th>
+                    <th>Tanggal Checkout</th>
+                    <th>Jumlah Kamar</th>
+                    <th>Tipe Tamu</th>
+                    <th>Nama Penunjung</th>
+                    <th>No. KTP</th>
+                    <th>Tipe Kamar</th>
+                    <th>Travel</th>
+                    <th>Harga Total</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
+                <?php $id = 1; ?>
+                <?php foreach ($data_reservasi as $row) : ?>
+                    <?php
+                    if (!is_null($row['komisi'])) {
+                        $harga_noppn = (($row['harga'] * $row['jumlah_kamar']) * $row['komisi']) / 100 + $row['harga'];
+                        $harga_total = ($harga_noppn * 11) / 100 + $harga_noppn;
+                    } else {
+                        $harga_noppn = $row['harga'] * $row['jumlah_kamar'];
+                        $harga_total = ($harga_noppn * 11) / 100 + $harga_noppn;
+                    }
+                    ?>
+                    <tr>
+                        <td><?php echo $id++ ?></td>
+                        <td><?php echo $row['tanggal_checkin'] ?></td>
+                        <td><?php echo $row['tanggal_checkout'] ?></td>
+                        <td><?php echo $row['jumlah_kamar'] ?></td>
+                        <td><?php echo $row['tipe_tamu'] ?></td>
+                        <td><?php echo $row['nama'] ?></td>
+                        <td><?php echo $row['no_ktp'] ?></td>
+                        <td><?php echo $row['tipe'] ?></td>
+                        <td><?php echo is_null($row['nama_travel']) ? '-' : $row['nama_travel'] ?></td>
+                        <td><?php echo number_format($harga_total, 0, ',', '.') ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
 

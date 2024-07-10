@@ -70,7 +70,7 @@ function getTitle()
                             </div>
                         </a>
 
-                        <a href="#" class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[25px]">
+                        <a href="index.php?url=pemesanan" class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[25px]">
                             <div class="flex flex-row items-start justify-start gap-[12px]">
                                 <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/file.svg" />
                                 <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">

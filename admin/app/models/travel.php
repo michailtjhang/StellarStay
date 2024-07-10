@@ -38,8 +38,8 @@ class travel
     public function simpan($data)
     {
         $kodeAuto = $this->kodeAuto();
-        $sql = "INSERT INTO travel_online (nama_travel, komisi)
-        VALUES (?,?)";
+        $sql = "INSERT INTO travel_online (id, nama_travel, komisi)
+        VALUES (?,?,?)";
         $ps = $this->koneksi->prepare($sql);
         $ps->execute(array_merge([$kodeAuto], $data));
     }
