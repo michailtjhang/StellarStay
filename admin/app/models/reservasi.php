@@ -51,8 +51,8 @@ class reservasi
     public function simpan($data)
     {
         // Convert date format
-        $checkin = DateTime::createFromFormat('d/m/Y', $data['in'])->format('Y-m-d');
-        $checkout = DateTime::createFromFormat('d/m/Y', $data['out'])->format('Y-m-d');
+        $checkin = date('Y-m-d', strtotime($data['in']));
+        $checkout = date('Y-m-d', strtotime($data['out']));
 
         // Convert name to lowercase
         $namatamu = strtolower($data['namatamu']);
@@ -111,7 +111,7 @@ class reservasi
 
     public function kodeAuto()
     {
-        $sql = "SELECT MAX(CAST(SUBSTRING(id, 2) AS UNSIGNED)) as max_id FROM reservasi";
+        $sql = "SELECT MAX(CAST(SUBSTRING(id, 3) AS UNSIGNED)) as max_id FROM reservasi";
         $rs = $this->koneksi->query($sql)->fetch();
 
         $kode = ($rs['max_id'] ?? 0) + 1;

@@ -3,6 +3,7 @@
 session_start();
 
 include_once '../database/koneksi.php';
+require '../vendor/autoload.php';
 
 // models
 include_once 'app/models/user.php';

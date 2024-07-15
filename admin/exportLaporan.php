@@ -1,92 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Pengiriman Paket</title>
-    <style>
-      * {
-          /* Change your font family */
-          font-family: sans-serif;
-      }
+<?php
+require '../vendor/autoload.php';
+include_once '../database/koneksi.php';
+include_once 'app/models/reservasi.php';
 
-      h1 {
-          text-align: center;
-      }
-      .content-table {
-          border-collapse: collapse;
-          margin: 25px 0;
-          font-size: 0.9em;
-          width: 100%;
-          border-radius: 5px 5px 0 0;
-          overflow: hidden;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-      }
+use Fpdf\Fpdf;
+use Carbon\Carbon;
 
-      .content-table thead tr {
-          background-color: #009879;
-          color: #ffffff;
-          text-align: left;
-          font-weight: bold;
-      }
+// Fungsi untuk mendapatkan nama bulan dalam Bahasa Indonesia
+function getNamaBulan($bulan) {
+    $namaBulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret', '04' => 'April',
+        '05' => 'Mei', '06' => 'Juni', '07' => 'Juli', '08' => 'Agustus',
+        '09' => 'September', '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    return $namaBulan[$bulan] ?? '';
+}
 
-      .content-table th,
-      .content-table td {
-          padding: 12px 15px;
-      }
+// Inisialisasi model reservasi dan ambil data
+$model = new reservasi();
 
-      .content-table tbody tr {
-          border-bottom: 1px solid #dddddd;
-      }
+// Periksa apakah ada data filter
+if (isset($_GET['bulan'])) {
+    $bulan = $_GET['bulan'];
+} else {
+    // Jika tidak ada filter, gunakan bulan saat ini
+    $bulan = Carbon::now()->format('m');
+}
 
-      .content-table tbody tr:nth-of-type(even) {
-          background-color: #f3f3f3;
-      }
+$data_reservasi = $model->getReservasi($bulan);
+$namaBulan = getNamaBulan($bulan);
 
-      .content-table tbody tr:last-of-type {
-          border-bottom: 2px solid #009879;
-      }
+class PDF extends FPDF
+{
+    protected $namaBulan;
 
-      .content-table tbody tr.active-row {
-          font-weight: bold;
-          color: #009879;
-      }
-    </style>
-</head>
-<body>
-  <h1>Detail Pengiriman Paket</h1>
-    <table class="content-table">
-        <thead>
-			<tr>
-				<th>No</th>
-				<th>Kode</th>
-				<th>Tanggal</th>
-				<th>Lokasi Penerima</th>
-				<th>Nama Penerima</th>
-				<th>Nama Layanan</th>
-				<th>Detail Paket</th>
-			</tr>
-        </thead>
-        <tbody>
-			@foreach ($laporanKirim as $row)
-				<tr>
-					<td>{{ $loop->iteration }}</td>
-					<td>{{ $row->kode }}</td>
-					<td>{{ $row->tanggal }}</td>
-					<td>{{ $row->lokasi_tujuan }}</td>
-					<td>{{ $row->penerima->nama }}</td>
-					<td>{{ $row->layanan->nama_layanan }}</td>
-					<td>
-						<ul>
-							<li>Berat: {{ $row->paket->berat }} kg</li>
-							<li>Isi: {{ $row->paket->deskripsi }}</li>
-						</ul>
-					</td>
-				</tr>
-			@endforeach
-        </tbody>
-      </table>
-</body>
-</html>
+    function __construct($orientation = 'P', $unit = 'mm', $size = 'A4', $namaBulan = '')
+    {
+        parent::__construct($orientation, $unit, $size);
+        $this->namaBulan = $namaBulan;
+    }
 
+    function Header()
+    {
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(0, 10, 'Laporan Reservasi Bulan ' . $this->namaBulan, 0, 1, 'C');
+        $this->Ln(5);
+        $this->SetFont('Arial', 'B', 10);
+        $this->Cell(10, 10, '#', 1, 0, 'C');
+        $this->Cell(30, 10, 'Tanggal Checkin', 1, 0, 'C');
+        $this->Cell(35, 10, 'Tanggal Checkout', 1, 0, 'C');
+        $this->Cell(25, 10, 'Jumlah Kamar', 1, 0, 'C');
+        $this->Cell(25, 10, 'Tipe Tamu', 1, 0, 'C');
+        $this->Cell(35, 10, 'Nama Pengunjung', 1, 0, 'C');
+        $this->Cell(30, 10, 'No. KTP', 1, 0, 'C');
+        $this->Cell(25, 10, 'Tipe Kamar', 1, 0, 'C');
+        $this->Cell(25, 10, 'Travel', 1, 0, 'C');
+        $this->Cell(30, 10, 'Harga Total', 1, 0, 'C');
+        $this->Ln();
+    }
+
+    function Footer()
+    {
+        $this->SetY(-15);
+        $this->SetFont('Arial', 'I', 8);
+        $this->Cell(0, 10, 'Halaman ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+    }
+
+    function FancyTable($data)
+    {
+        $this->SetFont('Arial', '', 9);
+        $id = 1;
+        foreach ($data as $row) {
+            if (!is_null($row['komisi'])) {
+                $harga_noppn = (($row['harga'] * $row['jumlah_kamar']) * $row['komisi']) / 100 + $row['harga'];
+                $harga_total = ($harga_noppn * 11) / 100 + $harga_noppn;
+            } else {
+                $harga_noppn = $row['harga'] * $row['jumlah_kamar'];
+                $harga_total = ($harga_noppn * 11) / 100 + $harga_noppn;
+            }
+
+            $this->Cell(10, 10, $id++, 1);
+            $this->Cell(30, 10, $row['tanggal_checkin'], 1);
+            $this->Cell(35, 10, $row['tanggal_checkout'], 1);
+            $this->Cell(25, 10, $row['jumlah_kamar'], 1);
+            $this->Cell(25, 10, $row['tipe_tamu'], 1);
+            $this->Cell(35, 10, $row['nama'], 1);
+            $this->Cell(30, 10, $row['no_ktp'], 1);
+            $this->Cell(25, 10, $row['tipe'], 1);
+            $this->Cell(25, 10, is_null($row['nama_travel']) ? '-' : $row['nama_travel'], 1);
+            $this->Cell(30, 10, number_format($harga_total, 0, ',', '.'), 1);
+            $this->Ln();
+        }
+    }
+}
+
+// Inisialisasi model reservasi
+$model = new reservasi();
+
+// Periksa apakah ada data filter
+if (isset($_GET['temp_file'])) {
+    $tempFile = sys_get_temp_dir() . '/' . $_GET['temp_file'];
+    if (file_exists($tempFile)) {
+        $data_reservasi = unserialize(file_get_contents($tempFile));
+        unlink($tempFile); // Hapus file sementara setelah digunakan
+    } else {
+        // Jika file tidak ada, gunakan bulan saat ini
+        $bulanSekarang = Carbon::now()->format('m');
+        $data_reservasi = $model->getReservasi($bulanSekarang);
+    }
+} else {
+    // Jika tidak ada filter, gunakan bulan saat ini
+    $bulanSekarang = Carbon::now()->format('m');
+    $data_reservasi = $model->getReservasi($bulanSekarang);
+}
+
+// Buat PDF
+$pdf = new PDF('L', 'mm', 'A4', $namaBulan); // Landscape, mm, A4
+$pdf->AliasNbPages();
+$pdf->AddPage();
+$pdf->FancyTable($data_reservasi);
+
+// Generate nama file dengan timestamp
+$timestamp = Carbon::now()->format('Ymd_His');
+$filename = 'LaporanReservasi_' . $timestamp . '.pdf';
+
+$pdf->Output('D', $filename);

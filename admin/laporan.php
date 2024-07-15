@@ -1,4 +1,7 @@
 <?php
+
+use Carbon\Carbon;
+
 $model = new reservasi();
 
 // Periksa apakah ada data filter
@@ -8,10 +11,14 @@ if (isset($_GET['temp_file'])) {
         $data_reservasi = unserialize(file_get_contents($tempFile));
         unlink($tempFile); // Hapus file sementara setelah digunakan
     } else {
-        $data_reservasi = $model->dataReservasi();
+        // Jika file tidak ada, gunakan bulan saat ini
+        $bulanSekarang = Carbon::now()->format('m');
+        $data_reservasi = $model->getReservasi($bulanSekarang);
     }
 } else {
-    $data_reservasi = $model->dataReservasi();
+    // Jika tidak ada filter, gunakan bulan saat ini
+    $bulanSekarang = Carbon::now()->format('m');
+    $data_reservasi = $model->getReservasi($bulanSekarang);
 }
 ?>
 
@@ -51,7 +58,7 @@ if (isset($_GET['temp_file'])) {
 <div class="w-[1066px] max-w-full flex flex-col items-start gap-4  font-inter mr-4">
     <div class="w-full rounded-xl mr-10 bg-white p-6 mq750:p-4">
         <div class="flex justify-between items-center mb-8">
-            <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onclick="window.open('exportLaporan.php', '_blank')" >
+            <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onclick="window.location.href='exportLaporan.php?temp_file=<?php echo isset($tempFile) ? basename($tempFile) : ''; ?>'">
                 PDF
                 <i class="fa-solid fa-file-pdf ms-2"></i>
             </button>
