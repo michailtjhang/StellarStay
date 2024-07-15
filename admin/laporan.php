@@ -1,8 +1,18 @@
 <?php
+$model = new reservasi();
 
-$model =  new reservasi();
-$data_reservasi = $model->dataReservasi();
-
+// Periksa apakah ada data filter
+if (isset($_GET['temp_file'])) {
+    $tempFile = sys_get_temp_dir() . '/' . $_GET['temp_file'];
+    if (file_exists($tempFile)) {
+        $data_reservasi = unserialize(file_get_contents($tempFile));
+        unlink($tempFile); // Hapus file sementara setelah digunakan
+    } else {
+        $data_reservasi = $model->dataReservasi();
+    }
+} else {
+    $data_reservasi = $model->dataReservasi();
+}
 ?>
 
 <!-- ======================== datatable ========================= -->
@@ -40,10 +50,35 @@ $data_reservasi = $model->dataReservasi();
 </div>
 <div class="w-[1066px] max-w-full flex flex-col items-start gap-4  font-inter mr-4">
     <div class="w-full rounded-xl mr-10 bg-white p-6 mq750:p-4">
-        <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 mb-8">
-            PDF
-            <i class="fa-solid fa-file-pdf ms-2"></i>
-        </button>
+        <div class="flex justify-between items-center mb-8">
+            <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onclick="window.open('exportLaporan.php', '_blank')" >
+                PDF
+                <i class="fa-solid fa-file-pdf ms-2"></i>
+            </button>
+
+            <form action="app/controllers/laporanController.php" method="POST" class="flex items-center">
+                <label for="bulan" class="sr-only">Pilih Bulan</label>
+                <select id="bulan" name="date" class="block py-2.5 px-0 w-48 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mr-4">
+                    <option selected>Pilih Bulan</option>
+                    <option value="JA">Januari</option>
+                    <option value="FE">Februari</option>
+                    <option value="MA">Maret</option>
+                    <option value="AP">April</option>
+                    <option value="ME">Mei</option>
+                    <option value="JN">Juni</option>
+                    <option value="JL">Juli</option>
+                    <option value="AG">Agustus</option>
+                    <option value="SE">September</option>
+                    <option value="OK">Oktober</option>
+                    <option value="NO">November</option>
+                    <option value="DE">Desember</option>
+                </select>
+
+                <button type="submit" value="ambil" name="proses" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
+            </form>
+        </div>
+
+
         <table id="tableData" class="display w-full text-sm">
             <thead>
                 <tr>

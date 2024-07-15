@@ -28,15 +28,22 @@ class reservasi
         return $rs;
     }
 
-    public function getReservasi($id)
+    public function getReservasi($bulan)
     {
-        // mengambil dan melihat table jenis_produk
-        $sql = "SELECT * FROM reservasi where id = ?";
+        $tahun = date('Y'); // Ambil tahun sekarang
+        $sql = "SELECT r.tanggal_checkin, r.tanggal_checkout, r.jumlah_kamar, r.tipe_tamu, 
+            u.nama, u.no_ktp, 
+            k.tipe, k.harga,
+            t.nama_travel, t.komisi
+            FROM reservasi r
+            INNER JOIN tamu u ON u.id = r.idTamu 
+            INNER JOIN kamar k ON k.id = r.idKamar 
+            LEFT JOIN travel_online t ON t.id = r.idTravelOnline
+            WHERE MONTH(r.tanggal_checkout) = ? AND YEAR(r.tanggal_checkout) = ?";
 
-        // menggunakan mekanisme prepere statement PDO
         $ps = $this->koneksi->prepare($sql);
-        $ps->execute([$id]);
-        $rs = $ps->fetch();
+        $ps->execute([$bulan, $tahun]);
+        $rs = $ps->fetchAll();
 
         return $rs;
     }
