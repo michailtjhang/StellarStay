@@ -57,34 +57,42 @@ if (isset($_GET['temp_file'])) {
 </div>
 <div class="w-[1066px] max-w-full flex flex-col items-start gap-4  font-inter mr-4">
     <div class="w-full rounded-xl mr-10 bg-white p-6 mq750:p-4">
-        <div class="flex justify-between items-center mb-8">
-            <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onclick="window.location.href='exportLaporan.php?temp_file=<?php echo isset($tempFile) ? basename($tempFile) : ''; ?>'">
-                PDF
-                <i class="fa-solid fa-file-pdf ms-2"></i>
-            </button>
 
-            <form action="app/controllers/laporanController.php" method="POST" class="flex items-center">
-                <label for="bulan" class="sr-only">Pilih Bulan</label>
-                <select id="bulan" name="date" class="block py-2.5 px-0 w-48 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mr-4">
-                    <option selected>Pilih Bulan</option>
-                    <option value="JA">Januari</option>
-                    <option value="FE">Februari</option>
-                    <option value="MA">Maret</option>
-                    <option value="AP">April</option>
-                    <option value="ME">Mei</option>
-                    <option value="JN">Juni</option>
-                    <option value="JL">Juli</option>
-                    <option value="AG">Agustus</option>
-                    <option value="SE">September</option>
-                    <option value="OK">Oktober</option>
-                    <option value="NO">November</option>
-                    <option value="DE">Desember</option>
-                </select>
+        <div class="flex mb-4">
+            <form id="laporanForm" action="app/controllers/laporanController.php" method="POST" class="flex items-center justify-between w-full">
+                <div class="flex items-center">
+                    <label for="bulan" class="sr-only">Pilih Bulan</label>
+                    <select id="bulan" name="date" class="block py-2.5 px-0 w-48 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                        <option value="">Pilih Bulan</option>
+                        <option value="JA">Januari</option>
+                        <option value="FE">Februari</option>
+                        <option value="MA">Maret</option>
+                        <option value="AP">April</option>
+                        <option value="ME">Mei</option>
+                        <option value="JN">Juni</option>
+                        <option value="JL">Juli</option>
+                        <option value="AG">Agustus</option>
+                        <option value="SE">September</option>
+                        <option value="OK">Oktober</option>
+                        <option value="NO">November</option>
+                        <option value="DE">Desember</option>
+                    </select>
+                </div>
 
-                <button type="submit" value="ambil" name="proses" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Filter</button>
+                <div class="flex items-center space-x-4">
+                    <button type="submit" value="ambil" name="proses" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        Filter
+                    </button>
+
+                    <button type="submit" name="proses" value="export" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                        PDF
+                        <i class="fa-solid fa-file-pdf ms-2"></i>
+                    </button>
+                </div>
             </form>
         </div>
 
+        <div id="errorMessage" class="text-red-500 text-sm mb-4 hidden"></div>
 
         <table id="tableData" class="display w-full text-sm">
             <thead>
@@ -144,5 +152,21 @@ if (isset($_GET['temp_file'])) {
                 lengthMenu: "Show _MENU_ entries",
             }
         });
+    });
+</script>
+
+<script>
+    document.getElementById('laporanForm').addEventListener('submit', function(e) {
+        var bulan = document.getElementById('bulan');
+        var errorMessage = document.getElementById('errorMessage');
+
+        if (bulan.value === '') {
+            e.preventDefault(); // Mencegah form dikirim
+            errorMessage.textContent = 'Silakan pilih bulan terlebih dahulu!';
+            errorMessage.classList.remove('hidden');
+            bulan.focus();
+        } else {
+            errorMessage.classList.add('hidden');
+        }
     });
 </script>

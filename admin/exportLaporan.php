@@ -1,34 +1,6 @@
 <?php
-require '../vendor/autoload.php';
-include_once '../database/koneksi.php';
-include_once 'app/models/reservasi.php';
 
 use Fpdf\Fpdf;
-use Carbon\Carbon;
-
-// Fungsi untuk mendapatkan nama bulan dalam Bahasa Indonesia
-function getNamaBulan($bulan) {
-    $namaBulan = [
-        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret', '04' => 'April',
-        '05' => 'Mei', '06' => 'Juni', '07' => 'Juli', '08' => 'Agustus',
-        '09' => 'September', '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
-    ];
-    return $namaBulan[$bulan] ?? '';
-}
-
-// Inisialisasi model reservasi dan ambil data
-$model = new reservasi();
-
-// Periksa apakah ada data filter
-if (isset($_GET['bulan'])) {
-    $bulan = $_GET['bulan'];
-} else {
-    // Jika tidak ada filter, gunakan bulan saat ini
-    $bulan = Carbon::now()->format('m');
-}
-
-$data_reservasi = $model->getReservasi($bulan);
-$namaBulan = getNamaBulan($bulan);
 
 class PDF extends FPDF
 {
@@ -93,35 +65,3 @@ class PDF extends FPDF
         }
     }
 }
-
-// Inisialisasi model reservasi
-$model = new reservasi();
-
-// Periksa apakah ada data filter
-if (isset($_GET['temp_file'])) {
-    $tempFile = sys_get_temp_dir() . '/' . $_GET['temp_file'];
-    if (file_exists($tempFile)) {
-        $data_reservasi = unserialize(file_get_contents($tempFile));
-        unlink($tempFile); // Hapus file sementara setelah digunakan
-    } else {
-        // Jika file tidak ada, gunakan bulan saat ini
-        $bulanSekarang = Carbon::now()->format('m');
-        $data_reservasi = $model->getReservasi($bulanSekarang);
-    }
-} else {
-    // Jika tidak ada filter, gunakan bulan saat ini
-    $bulanSekarang = Carbon::now()->format('m');
-    $data_reservasi = $model->getReservasi($bulanSekarang);
-}
-
-// Buat PDF
-$pdf = new PDF('L', 'mm', 'A4', $namaBulan); // Landscape, mm, A4
-$pdf->AliasNbPages();
-$pdf->AddPage();
-$pdf->FancyTable($data_reservasi);
-
-// Generate nama file dengan timestamp
-$timestamp = Carbon::now()->format('Ymd_His');
-$filename = 'LaporanReservasi_' . $timestamp . '.pdf';
-
-$pdf->Output('D', $filename);
