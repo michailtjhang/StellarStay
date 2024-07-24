@@ -11,6 +11,7 @@ include_once 'app/models/kamar.php';
 include_once 'app/models/tamu.php';
 include_once 'app/models/travel.php';
 include_once 'app/models/reservasi.php';
+include_once 'app/models/pembayaran.php';
 
 $sesi = $_SESSION['MEMBER'];
 if (isset($sesi)) {

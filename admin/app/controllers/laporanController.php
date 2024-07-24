@@ -2,6 +2,7 @@
 require '../../../vendor/autoload.php';
 
 use Carbon\Carbon;
+
 include_once '../../../database/koneksi.php';
 include_once '../../exportLaporan.php';
 include_once '../models/reservasi.php';
@@ -13,7 +14,8 @@ $pemetaanBulan = [
     'SE' => '09', 'OK' => '10', 'NO' => '11', 'DE' => '12'
 ];
 
-function getNamaBulan($bulan) {
+function getNamaBulan($bulan)
+{
     $namaBulan = [
         '01' => 'Januari', '02' => 'Februari', '03' => 'Maret', '04' => 'April',
         '05' => 'Mei', '06' => 'Juni', '07' => 'Juli', '08' => 'Agustus',
@@ -53,7 +55,7 @@ switch ($tombol) {
 
             // Generate nama file dengan timestamp
             $timestamp = Carbon::now()->format('Ymd_His');
-            $filename = 'LaporanReservasi_' . $timestamp . '.pdf';
+            $filename = 'LaporanReservasi_' . $namaBulan . '_' . $timestamp . '.pdf';
 
             $pdf->Output('D', $filename);
         }

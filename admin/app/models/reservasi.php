@@ -32,13 +32,15 @@ class reservasi
     {
         $tahun = date('Y'); // Ambil tahun sekarang
         $sql = "SELECT r.tanggal_checkin, r.tanggal_checkout, r.jumlah_kamar, r.tipe_tamu, 
-            u.nama, u.no_ktp, 
-            k.tipe, k.harga,
-            t.nama_travel, t.komisi
+            t.nama AS nama_tamu, 
+            k.tipe AS tipe_kamar, k.harga AS harga_kamar,
+            tr.nama_travel, tr.komisi AS komisi_travel,
+            p.total_bayar AS total_pembayaran
             FROM reservasi r
-            INNER JOIN tamu u ON u.id = r.idTamu 
+            INNER JOIN tamu t ON t.id = r.idTamu 
             INNER JOIN kamar k ON k.id = r.idKamar 
-            LEFT JOIN travel_online t ON t.id = r.idTravelOnline
+            LEFT JOIN travel_online tr ON tr.id = r.idTravelOnline
+            LEFT JOIN pembayaran p ON r.id = p.idReservasi
             WHERE MONTH(r.tanggal_checkout) = ? AND YEAR(r.tanggal_checkout) = ?";
 
         $ps = $this->koneksi->prepare($sql);

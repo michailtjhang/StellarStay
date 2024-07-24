@@ -103,23 +103,24 @@ if (isset($_GET['temp_file'])) {
                     <th>Jumlah Kamar</th>
                     <th>Tipe Tamu</th>
                     <th>Nama Penunjung</th>
-                    <th>No. KTP</th>
                     <th>Tipe Kamar</th>
                     <th>Travel</th>
                     <th>Harga Total</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $id = 1; ?>
                 <?php foreach ($data_reservasi as $row) : ?>
                     <?php
-                    if (!is_null($row['komisi'])) {
-                        $harga_noppn = (($row['harga'] * $row['jumlah_kamar']) * $row['komisi']) / 100 + $row['harga'];
+                    if (!is_null($row['komisi_travel'])) {
+                        $harga_noppn = (($row['harga_kamar'] * $row['jumlah_kamar']) * $row['komisi_travel']) / 100 + $row['harga_kamar'];
                         $harga_total = ($harga_noppn * 11) / 100 + $harga_noppn;
                     } else {
-                        $harga_noppn = $row['harga'] * $row['jumlah_kamar'];
+                        $harga_noppn = $row['harga_kamar'] * $row['jumlah_kamar'];
                         $harga_total = ($harga_noppn * 11) / 100 + $harga_noppn;
                     }
+                    $status = is_null($row['total_pembayaran']) ? "Pending" : "Lunas";
                     ?>
                     <tr>
                         <td><?php echo $id++ ?></td>
@@ -127,11 +128,11 @@ if (isset($_GET['temp_file'])) {
                         <td><?php echo $row['tanggal_checkout'] ?></td>
                         <td><?php echo $row['jumlah_kamar'] ?></td>
                         <td><?php echo $row['tipe_tamu'] ?></td>
-                        <td><?php echo $row['nama'] ?></td>
-                        <td><?php echo $row['no_ktp'] ?></td>
-                        <td><?php echo $row['tipe'] ?></td>
+                        <td><?php echo $row['nama_tamu'] ?></td>
+                        <td><?php echo $row['tipe_kamar'] ?></td>
                         <td><?php echo is_null($row['nama_travel']) ? '-' : $row['nama_travel'] ?></td>
                         <td><?php echo number_format($harga_total, 0, ',', '.') ?></td>
+                        <td><?php echo $status ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
