@@ -64,9 +64,16 @@ $data_pembayaran = $model->dataPembayaran();
                         <td><?php echo $status ?></td>
                         <td>
                             <a href="index.php?url=Pages/pembayaran/pembayaran_form&idedit=<?= $row['reservasi_id'] ?>">
-                                <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:focus:ring-yellow-900">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
+                                <?php if ($status == "Pending") : ?>
+                                    <button type="button" class="focus:outline-none text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:focus:ring-yellow-900">
+                                        <i class="fa-regular fa-credit-card"></i>
+                                    </button>
+                                <?php else : ?>
+                                    <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:focus:ring-yellow-900 cursor-not-allowed" disabled >
+                                        <i class="fa-regular fa-credit-card"></i>
+                                    </button>
+
+                                <?php endif; ?>
                             </a>
                         </td>
                     </tr>

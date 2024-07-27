@@ -26,7 +26,8 @@ if (isset($sesi)) {
         'pages/kamar/dtkamar' => 'Data Room - Your Site Name',
         'pages/tamu/dttamu' => 'Data Penunjung - Your Site Name',
         'pages/travel/dttravel' => 'Data Travel Online - Your Site Name',
-        'pages/user/dtuser' => 'Data User - Your Site Name'
+        'pages/user/dtuser' => 'Data User - Your Site Name',
+        'pages/pembayaran/dtpembayaran' => 'Data Payment - Your Site Name'
     ];
 
     // Menentukan judul halaman berdasarkan URL

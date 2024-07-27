@@ -100,23 +100,26 @@ function getTitle()
                             <li>
                                 <a href="index.php?url=pages/tamu/dtTamu" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Penunjung</a>
                             </li>
-                            <li>
-                                <a href="index.php?url=pages/travel/dtTravel" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Travel</a>
-                            </li>
-                            <li>
-                                <a href="index.php?url=pages/user/dtUser" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User</a>
-                            </li>
+                            <?php if ($sesi['role'] == 'admin' || $sesi['role'] == 'manajer') { ?>
+                                <li>
+                                    <a href="index.php?url=pages/travel/dtTravel" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Travel</a>
+                                </li>
+                                <li>
+                                    <a href="index.php?url=pages/user/dtUser" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">User</a>
+                                </li>
+                            <?php } ?>
                         </ul>
 
-
-                        <a href="index.php?url=laporan" class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[25px]">
-                            <div class="flex flex-row items-start justify-start gap-[12px]">
-                                <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/file.svg" />
-                                <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
-                                    <span class="relative">Laporan</span>
+                        <?php if ($sesi['role'] == 'admin' || $sesi['role'] == 'manajer') { ?>
+                            <a href="index.php?url=laporan" class="flex flex-row items-start justify-start py-0 pr-[19px] pl-0 text-black no-underline mt-[25px]">
+                                <div class="flex flex-row items-start justify-start gap-[12px]">
+                                    <img class="h-[33px] w-[33px] relative overflow-hidden shrink-0" loading="lazy" alt="" src="../assets/image/file.svg" />
+                                    <div class="flex flex-col items-start justify-start pt-[7.5px] px-0 pb-0">
+                                        <span class="relative">Laporan</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        <?php } ?>
                     </div>
 
                     <div class="flex mt-[-130px] absolute flex-row items-start justify-start py-0 px-0.5">
