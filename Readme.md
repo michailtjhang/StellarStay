@@ -1,5 +1,5 @@
 # About StellarStay
-
+StellarStay adalah sistem yang dirancang untuk membantu pengelola hotel dalam mengelola pemesanan kamar secara efisien. Dengan StellarStay, Anda bisa dengan mudah melihat ketersediaan kamar, membuat reservasi, dan mengelola data tamu. Sistem ini juga dilengkapi dengan fitur-fitur tambahan seperti pembuatan laporan bulanan dan lain sebagainya. Singkatnya, StellarStay adalah alat yang berguna untuk mengoptimalkan operasional hotel.
 
 ## Requirements
 
